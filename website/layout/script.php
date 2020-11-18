@@ -283,7 +283,7 @@ $header = '<header class="main-header">
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="'.$url.''.$foto.'" class="user-image" alt="User Image">
+              <img src="'.$url.''.'dist\img\avatar5.png'.'" class="user-image" alt="User Image">
               <span class="hidden-xs">'.$usuario.'</span>
             </a>
             <ul class="dropdown-menu">
