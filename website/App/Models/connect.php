@@ -48,4 +48,4 @@
  	}
  	
  }
-$connect = new Connect; 
+$connect = new Connect;

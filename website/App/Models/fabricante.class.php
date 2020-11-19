@@ -63,7 +63,7 @@
 
  }
 
- 	public function InsertFabricante($NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario, $NomeRepresentante, $TelefoneRepresentante, $EmailRepresentante){
+  public function InsertFabricante($NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario, $NomeRepresentante, $TelefoneRepresentante, $EmailRepresentante){
 
  		$this->query = "INSERT INTO `fabricante`(`idFabricante`, `NomeFabricante`, `CNPJFabricante`, `EmailFabricante`, `EnderecoFabricante`, `TelefoneFabricante`, `Usuario_idUser`) VALUES (NULL, '$NomeFabricante', '$CNPJFabricante', '$EmailFabricante', '$EnderecoFabricante', '$TelefoneFabricante', '$idUsuario')";
  		if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
@@ -86,6 +86,32 @@
 
  	}//Insert
 
+  public function EditFabricante($idFabricante) {
+    $this->query = "SELECT * FROM `fabricante` WHERE `idFabricante` = `$idFabricante`";
+
+    if($this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL))) {
+
+      if($row = mysqli_fetch_array($this->result)) {
+
+        $NomeFabricante = row['NomeFabricante'];
+        $CNPJFabricante = row['CNPJFabricante'];
+        $EmailFabricante = row['EmailFabricante'];
+        $EnderecoFabricante = row['EnderecoFabricante'];
+        $TelefoneFabricante = row['TelefoneFabricante'];
+        $Usuario_idUser = row['Usuario_idUser'];
+
+        $array = array('Fabricante' => [ 'Empresa' => '$NomeFabricante', 'CNPJ' => '$CNPJFabricante', 'Email' => '$EmailFabricante', 'Endereco' => '$EnderecoFabricante', 
+        'Telefone' => '$TelefoneFabricante', 'Usuario' => '$Usuario_idUser'], );
+
+        return $array;
+      }
+    } else {
+
+      return 0;
+    }
+
+  }
+  
   public function UpdateFabricante($idFabricante, $NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario){
 
 
