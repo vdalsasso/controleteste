@@ -75,6 +75,7 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
 
                 
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
+                 <input type="hidden" name="iduser" value="'.$idUsuario.'">
               <!-- /.box-body -->
 
               <div class="box-footer">
