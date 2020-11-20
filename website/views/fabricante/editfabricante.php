@@ -1,10 +1,12 @@
 <?php
 require_once '../../App/auth.php';
 require_once '../../layout/script.php';
+require_once '../../App/Models/fabricante.class.php';
 
 echo $head;
 echo $header;
 echo $aside;
+
 echo '<div class="content-wrapper">';
 echo '<!-- Content Header (Page header) -->
     <section class="content-header">
@@ -25,6 +27,14 @@ echo '<!-- Content Header (Page header) -->
 echo ' <a href="./" class="btn btn-success">Voltar</a>
       <div class="row">
         <!-- left column -->
+        ';
+
+        if(isset($_GET['id'])) {
+
+          $idFabricante = $_GET['id'];
+          $resp = $fabricante ->EditFabricante($idFabricante);
+
+echo '
         <div class="col-md-6">
           <!-- general form elements -->
           <div class="box box-primary">
@@ -37,23 +47,23 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
               <div class="box-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nome da Empresa</label>
-                  <input type="text" name="NomeFabricante" class="form-control" id="exampleInputEmail1" placeholder="Nome Fabricante">
+                  <input type="text" name="NomeFabricante" class="form-control" id="exampleInputEmail1" placeholder="Nome fabricante" value="'.$resp['Fabricante']['Nome'].'">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">CNPJ</label>
-                  <input type="text" name="CNPJFabricante" class="form-control" id="exampleInputEmail1" placeholder="CNPJ">
+                  <input type="text" name="CNPJFabricante" class="form-control" id="exampleInputEmail1" placeholder="CNPJ" value="'.$resp['Fabricante']['CNPJ'].'">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">E-mail</label>
-                  <input type="text" name="EmailFabricante" class="form-control" id="exampleInputEmail1" placeholder="E-mail">
+                  <input type="text" name="EmailFabricante" class="form-control" id="exampleInputEmail1" placeholder="E-mail" value="'.$resp['Fabricante']['Email'].'">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Endereco</label>
-                  <input type="text" name="EnderecoFabricante" class="form-control" id="exampleInputEmail1" placeholder="Endereço">
+                  <input type="text" name="EnderecoFabricante" class="form-control" id="exampleInputEmail1" placeholder="Endereço" value="'.$resp['Fabricante']['Endereco'].'">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Telefone</label>
-                  <input type="text" name="TelefoneFabricante" class="form-control" id="exampleInputEmail1" placeholder="Telefone">
+                  <input type="text" name="TelefoneFabricante" class="form-control" id="exampleInputEmail1" placeholder="Telefone" value="'.$resp['Fabricante']['Telefone'].'">
                 </div>
                 <hr />
                 <div class="box-header with-border">
@@ -75,7 +85,7 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
 
                 
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
-                 <input type="hidden" name="iduser" value="'.$idUsuario.'">
+                 <input type="hidden" name="idFabricante" value="'.$idFabricante.'">
               <!-- /.box-body -->
 
               <div class="box-footer">
@@ -85,8 +95,10 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
             </form>
           </div>
           <!-- /.box -->
-          </div>
-</div>';
+        </div>
+    </div>';
+
+    }//if
 
 echo '</div>';
 echo '</div>';
