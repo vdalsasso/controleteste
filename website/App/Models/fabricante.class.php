@@ -31,7 +31,7 @@
                   <!-- <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small> -->
                   <!-- General tools such as edit or delete-->
                   <div class="tools">
-                    <i class="fa fa-edit"></i>
+                    <a href="editfabricante.php?id='.$row['idFabricante'].'"<i class="fa fa-edit"></i></a>
                     <i class="fa fa-trash-o"></i>
                   </div>
                 </li>';
@@ -87,21 +87,21 @@
  	}//Insert
 
   public function EditFabricante($idFabricante) {
-    $this->query = "SELECT * FROM `fabricante` WHERE `idFabricante` = `$idFabricante`";
+    $this->query = "SELECT * FROM `fabricante` WHERE `idFabricante` = '$idFabricante'";
 
     if($this->result = mysqli_query($this->SQL, $this->query) or die ( mysqli_error($this->SQL))) {
 
       if($row = mysqli_fetch_array($this->result)) {
 
-        $NomeFabricante = row['NomeFabricante'];
-        $CNPJFabricante = row['CNPJFabricante'];
-        $EmailFabricante = row['EmailFabricante'];
-        $EnderecoFabricante = row['EnderecoFabricante'];
-        $TelefoneFabricante = row['TelefoneFabricante'];
-        $Usuario_idUser = row['Usuario_idUser'];
+        $NomeFabricante = $row['NomeFabricante'];
+        $CNPJFabricante = $row['CNPJFabricante'];
+        $EmailFabricante = $row['EmailFabricante'];
+        $EnderecoFabricante = $row['EnderecoFabricante'];
+        $TelefoneFabricante = $row['TelefoneFabricante'];
+        $Usuario_idUser = $row['Usuario_idUser'];
 
-        $array = array('Fabricante' => [ 'Empresa' => '$NomeFabricante', 'CNPJ' => '$CNPJFabricante', 'Email' => '$EmailFabricante', 'Endereco' => '$EnderecoFabricante', 
-        'Telefone' => '$TelefoneFabricante', 'Usuario' => '$Usuario_idUser'], );
+        $array = array('Fabricante' => [ 'Nome' => $NomeFabricante, 'CNPJ' => $CNPJFabricante, 'Email' => $EmailFabricante, 'Endereco' => $EnderecoFabricante, 
+        'Telefone' => $TelefoneFabricante, 'Usuario' => $Usuario_idUser], );
 
         return $array;
       }
