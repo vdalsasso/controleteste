@@ -11,7 +11,7 @@ echo '<div class="content-wrapper">';
 echo '<!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Adicionar <small>Fabricante</small>
+        Editar <small>Fabricante</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -39,7 +39,7 @@ echo '
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Fabricante</h3>
+              <h3 class="box-title">Editar Fabricante</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -65,32 +65,34 @@ echo '
                   <label for="exampleInputEmail1">Telefone</label>
                   <input type="text" name="TelefoneFabricante" class="form-control" id="exampleInputEmail1" placeholder="Telefone" value="'.$resp['Fabricante']['Telefone'].'">
                 </div>
-                <hr />
-                <div class="box-header with-border">
-              <h3 class="box-title">Representante</h3>
-            </div>
-              
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Nome</label>
-                  <input type="text" name="NomeRepresentante" class="form-control" id="exampleInputEmail1" placeholder="Nome do Representante">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Telefone</label>
-                  <input type="text" name="TelefoneRepresentante" class="form-control" id="exampleInputEmail1" placeholder="Telefone">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">E-mail</label>
-                  <input type="text" name="EmailRepresentante" class="form-control" id="exampleInputEmail1" placeholder="E-mail ">
-                </div>
+                  <label for="exampleInputEmail1">Ativo</label>
+                  <select name="Ativo">
+                  ';
 
-                
+                  $ativo = $resp['Fabricante']['Ativo'];
+
+                  if($ativo == 1) {
+                    $selected1 = "selected";
+                    $selected0 = " ";
+                  } else {
+                    $selected1 = " ";
+                    $selected0 = "selected";
+                  }
+
+                  echo '
+                    <option value="1" '.$selected1.' >SIM</option>
+                    <option value="0" '.$selected0.' >NÃO</option>
+                  </select>
+                </div>
+   
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
                  <input type="hidden" name="idFabricante" value="'.$idFabricante.'">
               <!-- /.box-body -->
 
               <div class="box-footer">
                 <button type="submit" name="upload" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
-                <a class="btn btn-danger" href="../../views/prod">Cancelar</a>
+                <a class="btn btn-danger" href="../../views/fabricante">Cancelar</a>
               </div>
             </form>
           </div>

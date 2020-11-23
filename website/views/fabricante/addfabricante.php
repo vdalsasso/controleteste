@@ -56,9 +56,12 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
                   <input type="text" name="TelefoneFabricante" class="form-control" id="exampleInputEmail1" placeholder="Telefone">
                 </div>
                 <hr />
+                ';
+                /*
                 <div class="box-header with-border">
               <h3 class="box-title">Representante</h3>
             </div>
+              ';
               
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nome</label>
@@ -73,10 +76,10 @@ echo ' <a href="./" class="btn btn-success">Voltar</a>
                   <input type="text" name="EmailRepresentante" class="form-control" id="exampleInputEmail1" placeholder="E-mail ">
                 </div>
 
-                
+                */
+                echo '
                  <input type="hidden" name="iduser" value="'.$idUsuario.'">
-              <!-- /.box-body -->
-
+              <!-- /.box-body --> */
               <div class="box-footer">
                 <button type="submit" name="upload" class="btn btn-primary" value="Cadastrar">Cadastrar</button>
                 <a class="btn btn-danger" href="../../views/prod">Cancelar</a>
