@@ -6,39 +6,41 @@ if(isset($_POST['upload']) == 'Cadastrar'){
 
 $NomeFabricante = $_POST['NomeFabricante'];
 
-
 //---Fabricante---//
 $CNPJFabricante = $_POST['CNPJFabricante'];
 $EmailFabricante = $_POST['EmailFabricante'];
 $EnderecoFabricante = $_POST['EnderecoFabricante'];
 $TelefoneFabricante = $_POST['TelefoneFabricante'];
+$Public = $_POST['Public'];
+$status = 1;
 
 //--Representante--//
 
 
-$NomeRepresentante = $_POST['NomeRepresentante'];
-$TelefoneRepresentante = $_POST['TelefoneRepresentante'];
-$EmailRepresentante = $_POST['EmailRepresentante'];
-
-
-
 $iduser = $_POST['iduser'];
 
-if($iduser == $idUsuario && $NomeFabricante != NULL && $NomeRepresentante != NULL && $TelefoneRepresentante != NULL && $EmailRepresentante != NULL){
+if($iduser == $idUsuario && $NomeFabricante != NULL){
 
-		if (isset($_POST['idFabricante'])){
-			$idFabricante = $_POST['idFabricante'];
-			$fabricante->UpdateFabricante($idFabricante, $NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario);		
-			
-		}else{
-			$fabricante->InsertFabricante($NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario,  $NomeRepresentante, $TelefoneRepresentante, $EmailRepresentante);
-		}
+		if (!isset($_POST['idFabricante'])){
+
+			$NomeRepresentante = $_POST['NomeRepresentante'];
+			$TelefoneRepresentante = $_POST['TelefoneRepresentante'];
+			$EmailRepresentante = $_POST['EmailRepresentante'];
+			$fabricante->InsertFabricante($NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario,  $NomeRepresentante, $TelefoneRepresentante, $EmailRepresentante, $status, $perm);
+		
 
 	}else{
-		header('Location: ../../views/prod/index.php?alert=3');
-	}
 
-
+		
+			$idFabricante = $_POST['idFabricante'];
+			$fabricante->UpdateFabricante($idFabricante, $NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $Public, $idUsuario , $perm);		
+			
+		}
+	}else{
+			header('Location: ../../views/fabricante/index.php?alert=3');
+		}
+		
+	
  }else{
-	header('Location: ../../views/prod/index.php');
+	header('Location: ../../views/fabricante/index.php');
 }

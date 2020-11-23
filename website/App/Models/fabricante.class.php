@@ -6,7 +6,7 @@
 
  require_once 'connect.php';
 
-  class Fabricante extends Connect
+class Fabricante extends Connect
  {
  	
  	public function index()
@@ -65,7 +65,7 @@
 
   public function InsertFabricante($NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario, $NomeRepresentante, $TelefoneRepresentante, $EmailRepresentante){
 
- 		$this->query = "INSERT INTO `fabricante`(`idFabricante`, `NomeFabricante`, `CNPJFabricante`, `EmailFabricante`, `EnderecoFabricante`, `TelefoneFabricante`, `Usuario_idUser`) VALUES (NULL, '$NomeFabricante', '$CNPJFabricante', '$EmailFabricante', '$EnderecoFabricante', '$TelefoneFabricante', '$idUsuario')";
+ 		$this->query = "INSERT INTO `fabricante`(`idFabricante`, `NomeFabricante`, `CNPJFabricante`, `EmailFabricante`, `EnderecoFabricante`, `TelefoneFabricante`, `Ativo`, `Usuario_idUser`) VALUES (NULL, '$NomeFabricante', '$CNPJFabricante', '$EmailFabricante', '$EnderecoFabricante', '$TelefoneFabricante', 1, '$idUsuario')";
  		if($this->result = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
 
       $idFabricante = mysqli_insert_id($this->SQL);
@@ -98,10 +98,11 @@
         $EmailFabricante = $row['EmailFabricante'];
         $EnderecoFabricante = $row['EnderecoFabricante'];
         $TelefoneFabricante = $row['TelefoneFabricante'];
+        $Ativo = $row['Ativo'];
         $Usuario_idUser = $row['Usuario_idUser'];
 
         $array = array('Fabricante' => [ 'Nome' => $NomeFabricante, 'CNPJ' => $CNPJFabricante, 'Email' => $EmailFabricante, 'Endereco' => $EnderecoFabricante, 
-        'Telefone' => $TelefoneFabricante, 'Usuario' => $Usuario_idUser], );
+        'Telefone' => $TelefoneFabricante, 'Ativo' => $Ativo, 'Usuario' => $Usuario_idUser], );
 
         return $array;
       }
@@ -112,11 +113,27 @@
 
   }
   
-  public function UpdateFabricante($idFabricante, $NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $idUsuario){
+  public function UpdateFabricante($idFabricante, $NomeFabricante, $CNPJFabricante, $EmailFabricante, $EnderecoFabricante, $TelefoneFabricante, $Ativo, $idUsuario){
 
+    $this->query = "UPDATE `fabricante` SET `NomeFabricante`='$NomeFabricante',`CNPJFabricante`= '$CNPJFabricante',`EmailFabricante`= '$EmailFabricante',`EnderecoFabricante`= '$EnderecoFabricante',`TelefoneFabricante`= '$TelefoneFabricante', `Ativo`= '$Ativo', `Usuario_idUser`='$idUsuario' WHERE `idFabricante` = '$idFabricante'";
 
-  }//update
+    if($this->rep = mysqli_query($this->SQL, $this->query) or die(mysqli_error($this->SQL))){
+      header('Location: ../../views/fabricante/index.php?alert=1'); 
+    }else{
+        header('Location: ../../views/fabricante/index.php?alert=0');
+    } 
+  }
 
+  public function DeleteFabricante($idFabricante){
+
+    //if(mysqli_query($this->SQL, "DELETE FROM `fabricante` WHERE `idFabricante` = '$idFabricante'") or die(mysqli_error($this->SQL))){
+    if(mysqli_query($this->SQL, "UPDATE `fabricante` SET `Ativo` = 0 WHERE `idFabricante` = '$idFabricante'") or die(mysqli_error($this->SQL))){
+    
+      header('Location: ../../views/fabricante/index.php?alert=1'); 
+    }else{
+        header('Location: ../../views/fabricante/index.php?alert=0');
+    } 
+  }
 
 
  }
